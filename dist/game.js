@@ -237,8 +237,8 @@
       r[0] = this.m[5] * t - this.m[6] * a + this.m[7] * U, r[4] = -(this.m[4] * t - this.m[6] * S + this.m[7] * v), r[8] = this.m[4] * a - this.m[5] * S + this.m[7] * D, r[12] = -(this.m[4] * U - this.m[5] * v + this.m[6] * D), r[1] = -(this.m[1] * t - this.m[2] * a + this.m[3] * U), r[5] = this.m[0] * t - this.m[2] * S + this.m[3] * v, r[9] = -(this.m[0] * a - this.m[1] * S + this.m[3] * D), r[13] = this.m[0] * U - this.m[1] * v + this.m[2] * D, r[2] = this.m[1] * V - this.m[2] * A + this.m[3] * L, r[6] = -(this.m[0] * V - this.m[2] * H + this.m[3] * Y), r[10] = this.m[0] * ie - this.m[1] * H + this.m[3] * N, r[14] = -(this.m[0] * L - this.m[1] * Y + this.m[2] * N), r[3] = -(this.m[1] * oe - this.m[2] * J + this.m[3] * ue), r[7] = this.m[0] * oe - this.m[2] * y + this.m[3] * ye, r[11] = -(this.m[0] * J - this.m[1] * y + this.m[3] * P), r[15] = this.m[0] * ue - this.m[1] * ye + this.m[2] * P;
       let T = this.m[0] * r[0] + this.m[1] * r[4] + this.m[2] * r[8] + this.m[3] * r[12];
       for (let _ = 0; _ < 4; _++)
-        for (let z = 0; z < 4; z++)
-          r[_ * 4 + z] *= 1 / T;
+        for (let z2 = 0; z2 < 4; z2++)
+          r[_ * 4 + z2] *= 1 / T;
       return le(r);
     } };
   }
@@ -844,15 +844,15 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     }
     __name(_, "_");
     i(_, "drawTexture");
-    function z(o, f, g, R, x, E = 1) {
+    function z2(o, f, g, R, x, E = 1) {
       R = Be(R % 360), x = Be(x % 360), x <= R && (x += Math.PI * 2);
       let C = Math.ceil(Math.max(Math.sqrt(f + g) * 3 * (E || 1), 16)), O = (x - R) / C, j = [];
       for (let re = R; re < x; re += O)
         j.push(o.add(f * Math.cos(re), g * Math.sin(re)));
       return j.push(o.add(f * Math.cos(x), g * Math.sin(x))), j;
     }
-    __name(z, "z");
-    i(z, "getArcPts");
+    __name(z2, "z");
+    i(z2, "getArcPts");
     function X(o) {
       if (o.width === void 0 || o.height === void 0)
         throw new Error('drawRect() requires property "width" and "height".');
@@ -861,7 +861,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       let f = o.width, g = o.height, x = Ge(o.origin || pt).add(1, 1).scale(c(f, g).scale(-0.5)), E = [c(0, 0), c(f, 0), c(f, g), c(0, g)];
       if (o.radius) {
         let C = Math.min(Math.min(f, g) / 2, o.radius);
-        E = [c(C, 0), c(f - C, 0), ...z(c(f - C, C), C, C, 270, 360), c(f, C), c(f, g - C), ...z(c(f - C, g - C), C, C, 0, 90), c(f - C, g), c(C, g), ...z(c(C, g - C), C, C, 90, 180), c(0, g - C), c(0, C), ...z(c(C, C), C, C, 180, 270)];
+        E = [c(C, 0), c(f - C, 0), ...z2(c(f - C, C), C, C, 270, 360), c(f, C), c(f, g - C), ...z2(c(f - C, g - C), C, C, 0, 90), c(f - C, g), c(C, g), ...z2(c(C, g - C), C, C, 90, 180), c(0, g - C), c(0, C), ...z2(c(C, C), C, C, 180, 270)];
       }
       ae(se(ne({}, o), { offset: x, pts: E }));
     }
@@ -919,7 +919,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       var f, g;
       if (o.radiusX === void 0 || o.radiusY === void 0)
         throw new Error('drawEllipse() requires properties "radiusX" and "radiusY".');
-      o.radiusX === 0 || o.radiusY === 0 || ae(se(ne({}, o), { pts: z(c(0), o.radiusX, o.radiusY, (f = o.start) != null ? f : 0, (g = o.end) != null ? g : 360, o.resolution), radius: 0 }));
+      o.radiusX === 0 || o.radiusY === 0 || ae(se(ne({}, o), { pts: z2(c(0), o.radiusX, o.radiusY, (f = o.start) != null ? f : 0, (g = o.end) != null ? g : 360, o.resolution), radius: 0 }));
     }
     __name(F, "F");
     i(F, "drawEllipse");
@@ -1178,11 +1178,11 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     }
     __name(_, "_");
     i(_, "screenshot");
-    function z(w) {
+    function z2(w) {
       return w && (t.canvas.style.cursor = w), t.canvas.style.cursor;
     }
-    __name(z, "z");
-    i(z, "cursor");
+    __name(z2, "z");
+    i(z2, "cursor");
     function X(w = true) {
       w ? Un(t.canvas) : gn();
     }
@@ -1215,7 +1215,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       cancelAnimationFrame(t.loopID), t.stopped = true;
     }
     __name(q, "q");
-    return i(q, "quit"), { gl: v, mousePos: V, mouseDeltaPos: A, isKeyDown: J, isKeyPressed: N, isKeyPressedRepeat: oe, isKeyReleased: ue, isMouseDown: H, isMousePressed: L, isMouseReleased: Y, isMouseMoved: ie, charInputted: y, cursor: z, dt: ye, time: P, fps: T, screenshot: _, run: k, quit: q, isFocused: () => document.activeElement === t.canvas, focus: () => t.canvas.focus(), canvas: t.canvas, isTouch: t.isTouch, scale: t.scale, fullscreen: X, isFullscreen: W };
+    return i(q, "quit"), { gl: v, mousePos: V, mouseDeltaPos: A, isKeyDown: J, isKeyPressed: N, isKeyPressedRepeat: oe, isKeyReleased: ue, isMouseDown: H, isMousePressed: L, isMouseReleased: Y, isMouseMoved: ie, charInputted: y, cursor: z2, dt: ye, time: P, fps: T, screenshot: _, run: k, quit: q, isFocused: () => document.activeElement === t.canvas, focus: () => t.canvas.focus(), canvas: t.canvas, isTouch: t.isTouch, scale: t.scale, fullscreen: X, isFullscreen: W };
   }
   __name(gr, "gr");
   i(gr, "appInit");
@@ -1340,12 +1340,12 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     }
     __name(v, "v");
     i(v, "loadRoot");
-    function D(P, T, _, z, X = {}) {
+    function D(P, T, _, z2, X = {}) {
       return U(new Promise((W, k) => {
         let q = Rr(T) ? T : a.loadRoot + T;
         $t(q).then(($) => {
           var ae;
-          let F = e.makeFont(e.makeTex($, X), _, z, (ae = X.chars) != null ? ae : qt);
+          let F = e.makeFont(e.makeTex($, X), _, z2, (ae = X.chars) != null ? ae : qt);
           P && (a.fonts[P] = F), W(F);
         }).catch(k);
       }));
@@ -1376,47 +1376,47 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     }
     __name(H, "H");
     i(H, "getShader");
-    function Y(P = 1, T = 1, _ = 0, z = 0, X = 1, W = 1) {
+    function Y(P = 1, T = 1, _ = 0, z2 = 0, X = 1, W = 1) {
       let k = [], q = X / P, $ = W / T;
       for (let F = 0; F < T; F++)
         for (let ae = 0; ae < P; ae++)
-          k.push(de(_ + ae * q, z + F * $, q, $));
+          k.push(de(_ + ae * q, z2 + F * $, q, $));
       return k;
     }
     __name(Y, "Y");
     i(Y, "slice");
     function ie(P, T) {
       return U(typeof T == "string" ? fetch(v() + T).then((_) => _.json()).then((_) => ie(P, _)) : N(null, P).then((_) => {
-        let z = {}, X = _.tex.width, W = _.tex.height;
+        let z2 = {}, X = _.tex.width, W = _.tex.height;
         for (let k in T) {
           let q = T[k], $ = { tex: _.tex, frames: Y(q.sliceX, q.sliceY, q.x / X, q.y / W, q.width / X, q.height / W), anims: q.anims };
-          a.sprites[k] = $, z[k] = $;
+          a.sprites[k] = $, z2[k] = $;
         }
-        return z;
+        return z2;
       }));
     }
     __name(ie, "ie");
     i(ie, "loadSpriteAtlas");
     function N(P, T, _ = { sliceX: 1, sliceY: 1, anims: {} }) {
-      function z(X, W, k = { sliceX: 1, sliceY: 1, anims: {} }) {
+      function z2(X, W, k = { sliceX: 1, sliceY: 1, anims: {} }) {
         let q = e.makeTex(W, k), $ = Y(k.sliceX || 1, k.sliceY || 1), F = { tex: q, frames: $, anims: k.anims || {} };
         return X && (a.sprites[X] = F), F;
       }
-      __name(z, "z");
-      return i(z, "loadRawSprite"), U(new Promise((X, W) => {
+      __name(z2, "z");
+      return i(z2, "loadRawSprite"), U(new Promise((X, W) => {
         if (!T)
           return W(`expected sprite src for "${P}"`);
         if (typeof T == "string") {
           let k = Rr(T) ? T : a.loadRoot + T;
-          $t(k).then((q) => X(z(P, q, _))).catch(W);
+          $t(k).then((q) => X(z2(P, q, _))).catch(W);
         } else
-          X(z(P, T, _));
+          X(z2(P, T, _));
       }));
     }
     __name(N, "N");
     i(N, "loadSprite");
     function oe(P, T) {
-      return U(new Promise((_, z) => {
+      return U(new Promise((_, z2) => {
         fetch(v() + T).then((X) => X.json()).then((X) => er(this, null, function* () {
           let W = yield Promise.all(X.frames.map($t)), k = document.createElement("canvas");
           k.width = X.width, k.height = X.height * X.frames.length;
@@ -1424,13 +1424,13 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
           return W.forEach(($, F) => {
             q.drawImage($, 0, F * X.height);
           }), N(P, k, { sliceY: X.frames.length, anims: X.anims });
-        })).then(_).catch(z);
+        })).then(_).catch(z2);
       }));
     }
     __name(oe, "oe");
     i(oe, "loadPedit");
     function J(P, T, _) {
-      return U(new Promise((z, X) => {
+      return U(new Promise((z2, X) => {
         let W = v() + _;
         N(P, T).then((k) => {
           fetch(W).then((q) => q.json()).then((q) => {
@@ -1438,14 +1438,14 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
             k.frames = q.frames.map((F) => de(F.frame.x / $.w, F.frame.y / $.h, F.frame.w / $.w, F.frame.h / $.h));
             for (let F of q.meta.frameTags)
               F.from === F.to ? k.anims[F.name] = F.from : k.anims[F.name] = { from: F.from, to: F.to, speed: 10, loop: true };
-            z(k);
+            z2(k);
           }).catch(X);
         }).catch(X);
       }));
     }
     __name(J, "J");
     i(J, "loadAseprite");
-    function ue(P, T, _, z = false) {
+    function ue(P, T, _, z2 = false) {
       function X(W, k, q) {
         let $ = e.makeShader(k, q);
         return W && (a.shaders[W] = $), $;
@@ -1462,7 +1462,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
           }).catch(k) : new Promise((F) => F(null));
         }
         __name(q, "q");
-        if (i(q, "resolveUrl"), z)
+        if (i(q, "resolveUrl"), z2)
           Promise.all([q(T), q(_)]).then(([$, F]) => {
             W(X(P, $, F));
           }).catch(k);
@@ -1478,7 +1478,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     i(ue, "loadShader");
     function y(P, T) {
       let _ = a.loadRoot + T;
-      return U(new Promise((z, X) => {
+      return U(new Promise((z2, X) => {
         if (!T)
           return X(`expected sound src for "${P}"`);
         typeof T == "string" && fetch(_).then((W) => {
@@ -1489,7 +1489,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
           r.ctx.decodeAudioData(W, k, q);
         })).then((W) => {
           let k = { buf: W };
-          P && (a.sounds[P] = k), z(k);
+          P && (a.sounds[P] = k), z2(k);
         }).catch(X);
       }));
     }
@@ -1649,11 +1649,11 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     }
     __name(_, "_");
     i(_, "camRot");
-    function z(n = 12) {
+    function z2(n = 12) {
       y.cam.shake = n;
     }
-    __name(z, "z");
-    i(z, "shake");
+    __name(z2, "z");
+    i(z2, "shake");
     function X(n) {
       return y.camMatrix.multVec2(n);
     }
@@ -2651,7 +2651,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     }
     __name(Yt, "Yt");
     i(Yt, "record");
-    let Xe = { loadRoot: v.loadRoot, loadSprite: v.loadSprite, loadSpriteAtlas: v.loadSpriteAtlas, loadSound: v.loadSound, loadFont: v.loadFont, loadShader: v.loadShader, loadAseprite: v.loadAseprite, loadPedit: v.loadPedit, loadBean: v.loadBean, load: v.load, width: U, height: S, center: vt, dt: L, time: t.time, screenshot: t.screenshot, record: Yt, focused: t.isFocused, isFocused: t.isFocused, focus: t.focus, cursor: t.cursor, regCursor: Ut, fullscreen: t.fullscreen, isFullscreen: t.isFullscreen, onLoad: _e, ready: _e, isTouch: () => t.isTouch, layers: ye, camPos: P, camScale: T, camRot: _, shake: z, toScreen: X, toWorld: W, gravity: et, add: F, readd: ae, destroy: ve, destroyAll: Ve, get: be, every: me, revery: Ye, pos: ge, scale: tt, rotate: gt, color: Ze, opacity: Je, origin: wt, layer: xt, area: Lr, sprite: Fr, text: Or, rect: _r, circle: Wr, uvquad: Xr, outline: qr, body: zr, shader: Zr, timer: $r, solid: Jr, fixed: jr, stay: Hr, health: Nr, lifespan: Qr, z: rt, move: we, cleanup: Ue, follow: nt, state: Kr, on: w, onUpdate: G, onDraw: Re, onCollide: Ae, onClick: Ee, onHover: ce, action: G, render: Re, collides: Ae, clicks: Ee, hovers: ce, onKeyDown: o, onKeyPress: f, onKeyPressRepeat: g, onKeyRelease: R, onMouseDown: x, onMousePress: E, onMouseRelease: C, onMouseMove: O, onCharInput: j, onTouchStart: re, onTouchMove: Z, onTouchEnd: ee, keyDown: o, keyPress: f, keyPressRep: g, keyRelease: R, mouseDown: x, mouseClick: E, mouseRelease: C, mouseMove: O, charInput: j, touchStart: re, touchMove: Z, touchEnd: ee, mousePos: Y, mouseWorldPos: ie, mouseDeltaPos: t.mouseDeltaPos, isKeyDown: t.isKeyDown, isKeyPressed: t.isKeyPressed, isKeyPressedRepeat: t.isKeyPressedRepeat, isKeyReleased: t.isKeyReleased, isMouseDown: t.isMouseDown, isMousePressed: t.isMousePressed, isMouseReleased: t.isMouseReleased, isMouseMoved: t.isMouseMoved, keyIsDown: t.isKeyDown, keyIsPressed: t.isKeyPressed, keyIsPressedRep: t.isKeyPressedRepeat, keyIsReleased: t.isKeyReleased, mouseIsDown: t.isMouseDown, mouseIsClicked: t.isMousePressed, mouseIsReleased: t.isMouseReleased, mouseIsMoved: t.isMouseMoved, loop: bt, wait: xe, play: H, volume: r.volume, burp: r.burp, audioCtx: r.ctx, rng: Dt, rand: Ne, randi: Rt, randSeed: ar, vec2: c, dir: ot, rgb: I, hsl2rgb: ir, quad: de, choose: cr, chance: ur, lerp: He, map: Oe, mapc: rr, wave: St, deg2rad: Be, rad2deg: Tt, testAreaRect: dt, testAreaLine: kt, testAreaCircle: It, testAreaPolygon: Lt, testAreaPoint: ht, testAreaArea: Ft, testLineLine: De, testRectRect: At, testRectLine: at, testRectPoint: Te, testPolygonPoint: $e, testLinePolygon: Qe, testPolygonPolygon: lt, testCircleCircle: Vt, testCirclePoint: ct, testRectPolygon: ut, drawSprite: N, drawText: oe, drawRect: a.drawRect, drawLine: a.drawLine, drawLines: a.drawLines, drawTriangle: a.drawTriangle, drawCircle: a.drawCircle, drawEllipse: a.drawEllipse, drawUVQuad: a.drawUVQuad, drawPolygon: a.drawPolygon, pushTransform: a.pushTransform, popTransform: a.popTransform, pushTranslate: a.pushTranslate, pushRotate: a.pushRotateZ, pushScale: a.pushScale, debug: Q, scene: en, go: tn, addLevel: sn, getData: rn, setData: Gt, plug: Et, ASCII_CHARS: qt, CP437_CHARS: Dr, LEFT: c(-1, 0), RIGHT: c(1, 0), UP: c(0, -1), DOWN: c(0, 1), RED: I(255, 0, 0), GREEN: I(0, 255, 0), BLUE: I(0, 0, 255), YELLOW: I(255, 255, 0), MAGENTA: I(255, 0, 255), CYAN: I(0, 255, 255), WHITE: I(255, 255, 255), BLACK: I(0, 0, 0), canvas: t.canvas };
+    let Xe = { loadRoot: v.loadRoot, loadSprite: v.loadSprite, loadSpriteAtlas: v.loadSpriteAtlas, loadSound: v.loadSound, loadFont: v.loadFont, loadShader: v.loadShader, loadAseprite: v.loadAseprite, loadPedit: v.loadPedit, loadBean: v.loadBean, load: v.load, width: U, height: S, center: vt, dt: L, time: t.time, screenshot: t.screenshot, record: Yt, focused: t.isFocused, isFocused: t.isFocused, focus: t.focus, cursor: t.cursor, regCursor: Ut, fullscreen: t.fullscreen, isFullscreen: t.isFullscreen, onLoad: _e, ready: _e, isTouch: () => t.isTouch, layers: ye, camPos: P, camScale: T, camRot: _, shake: z2, toScreen: X, toWorld: W, gravity: et, add: F, readd: ae, destroy: ve, destroyAll: Ve, get: be, every: me, revery: Ye, pos: ge, scale: tt, rotate: gt, color: Ze, opacity: Je, origin: wt, layer: xt, area: Lr, sprite: Fr, text: Or, rect: _r, circle: Wr, uvquad: Xr, outline: qr, body: zr, shader: Zr, timer: $r, solid: Jr, fixed: jr, stay: Hr, health: Nr, lifespan: Qr, z: rt, move: we, cleanup: Ue, follow: nt, state: Kr, on: w, onUpdate: G, onDraw: Re, onCollide: Ae, onClick: Ee, onHover: ce, action: G, render: Re, collides: Ae, clicks: Ee, hovers: ce, onKeyDown: o, onKeyPress: f, onKeyPressRepeat: g, onKeyRelease: R, onMouseDown: x, onMousePress: E, onMouseRelease: C, onMouseMove: O, onCharInput: j, onTouchStart: re, onTouchMove: Z, onTouchEnd: ee, keyDown: o, keyPress: f, keyPressRep: g, keyRelease: R, mouseDown: x, mouseClick: E, mouseRelease: C, mouseMove: O, charInput: j, touchStart: re, touchMove: Z, touchEnd: ee, mousePos: Y, mouseWorldPos: ie, mouseDeltaPos: t.mouseDeltaPos, isKeyDown: t.isKeyDown, isKeyPressed: t.isKeyPressed, isKeyPressedRepeat: t.isKeyPressedRepeat, isKeyReleased: t.isKeyReleased, isMouseDown: t.isMouseDown, isMousePressed: t.isMousePressed, isMouseReleased: t.isMouseReleased, isMouseMoved: t.isMouseMoved, keyIsDown: t.isKeyDown, keyIsPressed: t.isKeyPressed, keyIsPressedRep: t.isKeyPressedRepeat, keyIsReleased: t.isKeyReleased, mouseIsDown: t.isMouseDown, mouseIsClicked: t.isMousePressed, mouseIsReleased: t.isMouseReleased, mouseIsMoved: t.isMouseMoved, loop: bt, wait: xe, play: H, volume: r.volume, burp: r.burp, audioCtx: r.ctx, rng: Dt, rand: Ne, randi: Rt, randSeed: ar, vec2: c, dir: ot, rgb: I, hsl2rgb: ir, quad: de, choose: cr, chance: ur, lerp: He, map: Oe, mapc: rr, wave: St, deg2rad: Be, rad2deg: Tt, testAreaRect: dt, testAreaLine: kt, testAreaCircle: It, testAreaPolygon: Lt, testAreaPoint: ht, testAreaArea: Ft, testLineLine: De, testRectRect: At, testRectLine: at, testRectPoint: Te, testPolygonPoint: $e, testLinePolygon: Qe, testPolygonPolygon: lt, testCircleCircle: Vt, testCirclePoint: ct, testRectPolygon: ut, drawSprite: N, drawText: oe, drawRect: a.drawRect, drawLine: a.drawLine, drawLines: a.drawLines, drawTriangle: a.drawTriangle, drawCircle: a.drawCircle, drawEllipse: a.drawEllipse, drawUVQuad: a.drawUVQuad, drawPolygon: a.drawPolygon, pushTransform: a.pushTransform, popTransform: a.popTransform, pushTranslate: a.pushTranslate, pushRotate: a.pushRotateZ, pushScale: a.pushScale, debug: Q, scene: en, go: tn, addLevel: sn, getData: rn, setData: Gt, plug: Et, ASCII_CHARS: qt, CP437_CHARS: Dr, LEFT: c(-1, 0), RIGHT: c(1, 0), UP: c(0, -1), DOWN: c(0, 1), RED: I(255, 0, 0), GREEN: I(0, 255, 0), BLUE: I(0, 0, 255), YELLOW: I(255, 255, 0), MAGENTA: I(255, 0, 255), CYAN: I(0, 255, 255), WHITE: I(255, 255, 255), BLACK: I(0, 0, 0), canvas: t.canvas };
     if (Et(Ir), e.plugins && e.plugins.forEach(Et), e.global !== false)
       for (let n in Xe)
         window[n] = Xe[n];
@@ -2746,17 +2746,604 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     }), Xe;
   }, "default");
 
+  // code/spriteAtlasBF.json
+  var bf = {
+    x: 0,
+    y: 0,
+    width: 489,
+    height: 339,
+    sliceX: 6,
+    sliceY: 4,
+    anims: {
+      miss_down: {
+        from: 0,
+        to: 1,
+        speed: 30
+      },
+      down: {
+        from: 2,
+        to: 3,
+        speed: 30
+      },
+      idle: {
+        from: 4,
+        to: 8,
+        speed: 15,
+        loop: true
+      },
+      miss_left: {
+        from: 9,
+        to: 10,
+        speed: 30
+      },
+      left: {
+        from: 11,
+        to: 12,
+        speed: 30
+      },
+      miss_right: {
+        from: 13,
+        to: 14,
+        speed: 30
+      },
+      right: {
+        from: 15,
+        to: 16,
+        speed: 30
+      },
+      miss_up: {
+        from: 17,
+        to: 18,
+        speed: 30
+      },
+      up: {
+        from: 19,
+        to: 20,
+        speed: 30
+      }
+    }
+  };
+  var spriteAtlasBF_default = {
+    bf
+  };
+
+  // code/spriteAtlasTitle.json
+  var title = {
+    x: 0,
+    y: 0,
+    width: 5e3,
+    height: 5970,
+    sliceX: 5,
+    sliceY: 6,
+    anims: {
+      bop: {
+        from: 0,
+        to: 29,
+        loop: true,
+        speed: 20
+      }
+    }
+  };
+  var spriteAtlasTitle_default = {
+    title
+  };
+
+  // code/spriteAtlasOpponent.json
+  var mad_opponent = {
+    x: 0,
+    y: 0,
+    width: 2004,
+    height: 512,
+    sliceX: 15,
+    sliceY: 3,
+    anims: {
+      down: {
+        from: 0,
+        to: 1,
+        speed: 30
+      },
+      idle: {
+        from: 2,
+        to: 6,
+        speed: 15,
+        loop: true
+      },
+      left: {
+        from: 7,
+        to: 8,
+        speed: 30
+      },
+      right: {
+        from: 9,
+        to: 10,
+        speed: 30
+      },
+      up: {
+        from: 11,
+        to: 12,
+        speed: 30
+      }
+    }
+  };
+  var opponent = {
+    x: 0,
+    y: 0,
+    width: 2004,
+    height: 512,
+    sliceX: 15,
+    sliceY: 3,
+    anims: {
+      down: {
+        from: 13,
+        to: 14,
+        speed: 30
+      },
+      idle: {
+        from: 21,
+        to: 39,
+        speed: 15,
+        loop: true
+      },
+      left: {
+        from: 15,
+        to: 16,
+        speed: 30
+      },
+      right: {
+        from: 17,
+        to: 18,
+        speed: 30
+      },
+      up: {
+        from: 19,
+        to: 20,
+        speed: 30
+      }
+    }
+  };
+  var spriteAtlasOpponent_default = {
+    mad_opponent,
+    opponent
+  };
+
   // code/main.js
-  Es();
-  loadSprite("bean", "sprites/bean.png");
-  add([
-    sprite("bean"),
-    pos(80, 40),
-    area()
-  ]);
-  onClick(() => {
-    addKaboom(mousePos());
+  Es({
+    width: 1224,
+    height: 617,
+    root: document.getElementById("cool")
   });
-  onKeyPress("b", burp);
+  var MousePos = class {
+    constructor() {
+    }
+    get currentPos() {
+      return mousePos();
+    }
+    set currentPos(a) {
+      return mousePos();
+    }
+  };
+  __name(MousePos, "MousePos");
+  var mouse = new MousePos();
+  layers([
+    "bg",
+    "players",
+    "fg",
+    "ui"
+  ], "players");
+  loadSpriteAtlas("sprites/bfPixel.png", spriteAtlasBF_default);
+  loadSpriteAtlas("sprites/fnflogo.png", spriteAtlasTitle_default);
+  loadSpriteAtlas("sprites/senpaaaai.png", spriteAtlasOpponent_default);
+  loadSprite("story mode: idle", "sprites/story-mode.png");
+  loadSprite("freeplay: idle", "sprites/freeplay.png");
+  loadSprite("week6bg", "sprites/bg/bg.png");
+  loadSprite("story mode: selected", "sprites/story-mode_selec.png");
+  loadSprite("freeplay: selected", "sprites/freeplay_selec.png");
+  loadPedit("arrowdown_pressed", "sprites/downpressed.pedit");
+  loadPedit("arrowleft_pressed", "sprites/leftpressed.pedit");
+  loadPedit("arrowright_pressed", "sprites/rightpressed.pedit");
+  loadPedit("arrowup_pressed", "sprites/uppressed.pedit");
+  loadPedit("allnotpressed", "sprites/allnotpressed.pedit");
+  loadSprite("backspace", "sprites/backspace.png");
+  loadSprite("art", "sprites/Funkin.png");
+  var inmenu = true;
+  scene("cool stuff", () => {
+    inmenu = false;
+    onKeyPress("backspace", () => {
+      go("main");
+      inmenu = true;
+    });
+    const bf2 = add([
+      sprite("bf"),
+      layer("players"),
+      pos(909, 272),
+      area(),
+      scale(4)
+    ]);
+    bf2.play("idle");
+    const opponent2 = add([
+      sprite("opponent"),
+      layer("players"),
+      pos(256, 293),
+      area(),
+      scale(4),
+      origin("center")
+    ]);
+    opponent2.play("idle");
+    const bg = add([
+      sprite("week6bg"),
+      layer("bg"),
+      scale(4),
+      z(-999)
+    ]);
+    const keybindstext = add([
+      pos(center().x, height() - 30),
+      text("Current Keybinds: Arrow Keys (Left, Right, Up, Down)", { font: "sinko" }),
+      origin("center"),
+      scale(2.75),
+      opacity(1),
+      layer("ui")
+    ]);
+    add([
+      sprite("backspace"),
+      pos(10, 10),
+      scale(0.5)
+    ]);
+    keybindstext.use(move(10, 0));
+    function fadeKeybinds() {
+      let a = loop(0.1, () => {
+        keybindstext.opacity = keybindstext.opacity;
+        if (keybindstext.opacity == 0) {
+          a();
+        }
+      });
+    }
+    __name(fadeKeybinds, "fadeKeybinds");
+    const left = add([
+      sprite("allnotpressed"),
+      layer("ui"),
+      pos(center().x - 150 + 400, center().y - 225),
+      origin("center"),
+      rotate(0)
+    ]);
+    const up = add([
+      sprite("allnotpressed"),
+      layer("ui"),
+      pos(center().x - 50 + 400, center().y - 225),
+      origin("center"),
+      rotate(90)
+    ]);
+    const down = add([
+      sprite("allnotpressed"),
+      layer("ui"),
+      pos(center().x + 50 + 400, center().y - 225),
+      origin("center"),
+      rotate(270)
+    ]);
+    const right = add([
+      sprite("allnotpressed"),
+      layer("ui"),
+      pos(center().x + 150 + 400, center().y - 225),
+      origin("center"),
+      rotate(180)
+    ]);
+    const keybinds = {
+      current: "ARROWS",
+      ARROWS: {
+        left: {
+          hold: function() {
+            return keyPress("left", () => {
+              left.unuse(sprite("allnotpressed"));
+              left.use(sprite("arrowleft_pressed"));
+              bf2.stop();
+              opponent2.stop();
+              bf2.play("left");
+              opponent2.play("left");
+            });
+          },
+          release: function() {
+            return keyRelease("left", () => {
+              left.unuse(sprite("arrowleft_pressed"));
+              left.use(sprite("allnotpressed"));
+              bf2.stop();
+              opponent2.stop();
+              bf2.play("idle");
+              opponent2.play("idle");
+            });
+          }
+        },
+        up: {
+          hold: function() {
+            return keyPress("up", () => {
+              up.unuse(sprite("allnotpressed"));
+              up.use(sprite("arrowup_pressed"));
+              bf2.stop();
+              opponent2.stop();
+              bf2.play("up");
+              opponent2.play("up");
+            });
+          },
+          release: function() {
+            return keyRelease("up", () => {
+              up.unuse(sprite("arrowup_pressed"));
+              up.use(sprite("allnotpressed"));
+              bf2.stop();
+              opponent2.stop();
+              bf2.play("idle");
+              opponent2.play("idle");
+            });
+          }
+        },
+        down: {
+          hold: function() {
+            return keyPress("down", () => {
+              down.unuse(sprite("allnotpressed"));
+              down.use(sprite("arrowdown_pressed"));
+              bf2.stop();
+              opponent2.stop();
+              bf2.play("down");
+              opponent2.play("down");
+            });
+          },
+          release: function() {
+            return keyRelease("down", () => {
+              down.unuse(sprite("arrowdown_pressed"));
+              down.use(sprite("allnotpressed"));
+              bf2.stop();
+              opponent2.stop();
+              bf2.play("idle");
+              opponent2.play("idle");
+            });
+          }
+        },
+        right: {
+          hold: function() {
+            return keyPress("right", () => {
+              right.unuse(sprite("allnotpressed"));
+              right.use(sprite("arrowright_pressed"));
+              bf2.stop();
+              opponent2.stop();
+              bf2.play("right");
+              opponent2.play("right");
+            });
+          },
+          release: function() {
+            return keyRelease("right", () => {
+              right.unuse(sprite("arrowright_pressed"));
+              right.use(sprite("allnotpressed"));
+              bf2.stop();
+              opponent2.stop();
+              bf2.play("idle");
+              opponent2.play("idle");
+            });
+          }
+        }
+      },
+      WASD: {
+        left: {
+          hold: function() {
+            return keyPress("a", () => {
+              left.unuse(sprite("allnotpressed"));
+              left.use(sprite("arrowleft_pressed"));
+              bf2.stop();
+              opponent2.stop();
+              bf2.play("left");
+              opponent2.play("left");
+            });
+          },
+          release: function() {
+            return keyRelease("a", () => {
+              left.unuse(sprite("arrowleft_pressed"));
+              left.use(sprite("allnotpressed"));
+              bf2.stop();
+              opponent2.stop();
+              bf2.play("idle");
+              opponent2.play("idle");
+            });
+          }
+        },
+        up: {
+          hold: function() {
+            return keyPress("w", () => {
+              up.unuse(sprite("allnotpressed"));
+              up.use(sprite("arrowup_pressed"));
+              bf2.stop();
+              opponent2.stop();
+              bf2.play("up");
+              opponent2.play("up");
+            });
+          },
+          release: function() {
+            return keyRelease("w", () => {
+              up.unuse(sprite("arrowup_pressed"));
+              up.use(sprite("allnotpressed"));
+              bf2.stop();
+              opponent2.stop();
+              bf2.play("idle");
+              opponent2.play("idle");
+            });
+          }
+        },
+        down: {
+          hold: function() {
+            return keyPress("s", () => {
+              down.unuse(sprite("allnotpressed"));
+              down.use(sprite("arrowdown_pressed"));
+              bf2.stop();
+              opponent2.stop();
+              bf2.play("down");
+              opponent2.play("down");
+            });
+          },
+          release: function() {
+            return keyRelease("s", () => {
+              down.unuse(sprite("arrowdown_pressed"));
+              down.use(sprite("allnotpressed"));
+              bf2.stop();
+              opponent2.stop();
+              bf2.play("idle");
+              opponent2.play("idle");
+            });
+          }
+        },
+        right: {
+          hold: function() {
+            return keyPress("d", () => {
+              right.unuse(sprite("allnotpressed"));
+              right.use(sprite("arrowright_pressed"));
+              bf2.stop();
+              opponent2.stop();
+              bf2.play("right");
+              opponent2.play("right");
+            });
+          },
+          release: function() {
+            return keyRelease("d", () => {
+              right.unuse(sprite("arrowright_pressed"));
+              right.use(sprite("allnotpressed"));
+              bf2.stop();
+              opponent2.stop();
+              bf2.play("idle");
+              opponent2.play("idle");
+            });
+          }
+        }
+      }
+    };
+    let DownHoldCanceller = keybinds.ARROWS.down.hold();
+    let DownReleaseCanceller = keybinds.ARROWS.down.release();
+    let UpHoldCanceller = keybinds.ARROWS.up.hold();
+    let UpReleaseCanceller = keybinds.ARROWS.up.release();
+    let LeftHoldCanceller = keybinds.ARROWS.left.hold();
+    let LeftReleaseCanceller = keybinds.ARROWS.left.release();
+    let RightHoldCanceller = keybinds.ARROWS.right.hold();
+    let RightReleaseCanceller = keybinds.ARROWS.right.release();
+    keyPress("space", () => {
+      if (keybinds.current == "ARROWS") {
+        DownHoldCanceller();
+        DownReleaseCanceller();
+        UpHoldCanceller();
+        UpReleaseCanceller();
+        LeftHoldCanceller();
+        LeftReleaseCanceller();
+        RightHoldCanceller();
+        RightReleaseCanceller();
+        DownHoldCanceller = keybinds.WASD.down.hold();
+        DownReleaseCanceller = keybinds.WASD.down.release();
+        UpHoldCanceller = keybinds.WASD.up.hold();
+        UpReleaseCanceller = keybinds.WASD.up.release();
+        LeftHoldCanceller = keybinds.WASD.left.hold();
+        LeftReleaseCanceller = keybinds.WASD.left.release();
+        RightHoldCanceller = keybinds.WASD.right.hold();
+        RightReleaseCanceller = keybinds.WASD.right.release();
+        keybinds.current = "WASD";
+        keybindstext.text = "Current Keybinds: Keyboard Keys (WASD)";
+      } else if (keybinds.current == "WASD") {
+        DownHoldCanceller();
+        DownReleaseCanceller();
+        UpHoldCanceller();
+        UpReleaseCanceller();
+        LeftHoldCanceller();
+        LeftReleaseCanceller();
+        RightHoldCanceller();
+        RightReleaseCanceller();
+        DownHoldCanceller = keybinds.ARROWS.down.hold();
+        DownReleaseCanceller = keybinds.ARROWS.down.release();
+        UpHoldCanceller = keybinds.ARROWS.up.hold();
+        UpReleaseCanceller = keybinds.ARROWS.up.release();
+        LeftHoldCanceller = keybinds.ARROWS.left.hold();
+        LeftReleaseCanceller = keybinds.ARROWS.left.release();
+        RightHoldCanceller = keybinds.ARROWS.right.hold();
+        RightReleaseCanceller = keybinds.ARROWS.right.release();
+        keybinds.current = "ARROWS";
+        keybindstext.text = "Current Keybinds: Arrow Keys (Left, Right, Up, Down)";
+      }
+      keybindstext.opacity = 1;
+      wait(3, fadeKeybinds);
+    });
+    wait(3, fadeKeybinds);
+  });
+  scene("main", () => {
+    add([
+      rect(width(), height()),
+      color(0, 0, 0)
+    ]);
+    const art = add([
+      pos(width(), center().y / 4),
+      sprite("art"),
+      origin("topright"),
+      scale(0.450372)
+    ]);
+    const logo = add([
+      sprite("title"),
+      pos(0, -75),
+      scale(0.5)
+    ]);
+    logo.play("bop");
+    let curselection = 0;
+    const story = add([
+      sprite("story mode: selected"),
+      pos(255, 358),
+      scale(0.5),
+      origin("center"),
+      { spritename: "story mode" }
+    ]);
+    const freeplay = add([
+      sprite("freeplay: idle"),
+      pos(255, 450),
+      scale(0.5),
+      origin("center"),
+      { spritename: "freeplay" }
+    ]);
+    const buttons = [story, freeplay];
+    onKeyPress("down", () => {
+      let prevcurselection = curselection;
+      curselection = curselection + 1;
+      if (curselection == buttons.length) {
+        curselection = 0;
+      }
+      buttons[prevcurselection].use(sprite(`${buttons[prevcurselection].spritename}: idle`));
+      buttons[curselection].use(sprite(`${buttons[curselection].spritename}: selected`));
+    });
+    onKeyPress("up", () => {
+      let prevcurselection = curselection;
+      curselection = curselection - 1;
+      if (curselection == -1) {
+        curselection = buttons.length - 1;
+      }
+      buttons[prevcurselection].use(sprite(`${buttons[prevcurselection].spritename}: idle`));
+      buttons[curselection].use(sprite(`${buttons[curselection].spritename}: selected`));
+    });
+    onKeyPress("enter", () => {
+      if (curselection == 0) {
+        go("cool stuff");
+      }
+    });
+  });
+  add([
+    rect(width(), height()),
+    color(0, 0, 0)
+  ]);
+  var fakeloadingtext = add([
+    text("Loading assets", { font: "sinko" }),
+    scale(7),
+    pos(center()),
+    origin("center")
+  ]);
+  wait(5 / 3, () => {
+    fakeloadingtext.text = "Loading assets.";
+  });
+  wait(5 / 3 * 2, () => {
+    fakeloadingtext.text = "Loading assets..";
+  });
+  wait(5 / 3 * 3, () => {
+    fakeloadingtext.text = "Loading assets...";
+  });
+  wait(6, () => {
+    fakeloadingtext.text = "Assets loaded successfully!\n\nClick anywhere to load game!";
+    fakeloadingtext.scale = vec2(4, 4);
+    onClick(() => {
+      go("main");
+    });
+  });
 })();
 //# sourceMappingURL=game.js.map
