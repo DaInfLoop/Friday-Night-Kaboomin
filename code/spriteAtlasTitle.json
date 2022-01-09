@@ -1,0 +1,18 @@
+{
+  "title": {
+    "x": 0,
+    "y": 0,
+    "width": 5000,
+    "height": 5970,
+    "sliceX": 5,
+    "sliceY": 6,
+    "anims": {
+      "bop": {
+        "from": 0,
+        "to": 29,
+        "loop": true,
+        "speed": 20
+      }
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "mad_opponent": {
+    "x": 0,
+    "y": 0,
+    "width": 2004,
+    "height": 512,
+    "sliceX": 15,
+    "sliceY": 3,
+    "anims": {
+      "down": {
+        "from": 0,
+        "to": 1,
+        "speed": 30
+      },
+      "idle": {
+        "from": 2,
+        "to": 6,
+        "speed": 15,
+        "loop": true
+      },
+      "left": {
+        "from": 7,
+        "to": 8,
+        "speed": 30
+      },
+      "right": {
+        "from": 9,
+        "to": 10,
+        "speed": 30
+      },
+      "up": {
+        "from": 11,
+        "to": 12,
+        "speed": 30
+      }
+    }
+  },
+  "opponent": {
+    "x": 0,
+    "y": 0,
+    "width": 2004,
+    "height": 512,
+    "sliceX": 15,
+    "sliceY": 3,
+    "anims": {
+      "down": {
+        "from": 13,
+        "to": 14,
+        "speed": 30
+      },
+      "idle": {
+        "from": 21,
+        "to": 39,
+        "speed": 15,
+        "loop": true
+      },
+      "left": {
+        "from": 15,
+        "to": 16,
+        "speed": 30
+      },
+      "right": {
+        "from": 17,
+        "to": 18,
+        "speed": 30
+      },
+      "up": {
+        "from": 19,
+        "to": 20,
+        "speed": 30
+      }
+    }
+  }
+}
