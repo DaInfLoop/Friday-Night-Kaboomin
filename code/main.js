@@ -29,24 +29,6 @@ layers([
   "ui"
 ], "players")
 
-// load assets
-
-loadSpriteAtlas("sprites/bfPixel.png", json)
-loadSpriteAtlas("sprites/fnflogo.png", menuJSON)
-loadSpriteAtlas("sprites/senpaaaai.png", opponentJSON)
-loadSprite('story mode: idle', 'sprites/story-mode.png')
-loadSprite('freeplay: idle', 'sprites/freeplay.png')
-loadSprite('week6bg', 'sprites/bg/bg.png')
-loadSprite('story mode: selected', 'sprites/story-mode_selec.png')
-loadSprite('freeplay: selected', 'sprites/freeplay_selec.png')
-loadPedit('arrowdown_pressed', 'sprites/downpressed.pedit')
-loadPedit('arrowleft_pressed', 'sprites/leftpressed.pedit')
-loadPedit('arrowright_pressed', 'sprites/rightpressed.pedit')
-loadPedit('arrowup_pressed', 'sprites/uppressed.pedit')
-loadPedit('allnotpressed', 'sprites/allnotpressed.pedit')
-loadSprite('backspace', 'sprites/backspace.png')
-loadSprite('art', 'sprites/Funkin.png')
-
 let inmenu = true
 
 scene('cool stuff', () => {
@@ -76,7 +58,8 @@ const opponent = add([
 	pos(256, 293),
 	area(),
   scale(4),
-  origin('center')
+  origin('center'),
+  { currentAnimation: "opponent", animations: ["opponent", "mad_opponent"] }
 ])
 
 opponent.play('idle')
@@ -360,6 +343,9 @@ function fadeKeybinds() {
         RightReleaseCanceller = keybinds.WASD.right.release()
         keybinds.current = "WASD"
         keybindstext.text = "Current Keybinds: Keyboard Keys (WASD)"
+        opponent.stop()
+        opponent.use(sprite('mad_opponent'))
+        opponent.play('idle')
       } else if (keybinds.current == "WASD") {
         DownHoldCanceller()
         DownReleaseCanceller()
@@ -380,11 +366,13 @@ function fadeKeybinds() {
         RightReleaseCanceller = keybinds.ARROWS.right.release()
         keybinds.current = "ARROWS"
         keybindstext.text = "Current Keybinds: Arrow Keys (Left, Right, Up, Down)"
+        opponent.stop()
+        opponent.use(sprite('opponent'))
+        opponent.play("idle")
       }
       keybindstext.opacity = 1
       wait(3, fadeKeybinds)
     })
-
     wait(3, fadeKeybinds)
 })
 
@@ -458,32 +446,86 @@ scene('main', () => {
 
 add([
   rect(width(), height()),
-  color(0,0,0)
+  color(202,255,77),
+  z(-100),
 ])
 
 const fakeloadingtext = add([
-  text("Loading assets", { font: 'sinko' }),
-  scale(7),
+  text("Loading assets...", { font: 'sinko' }),
+  scale(4),
   pos(center()),
-  origin('center')
+  origin('center'),
 ])
 
-wait((5/3), () => {
-  fakeloadingtext.text = "Loading assets."
-})
+const assetnum = 16
 
-wait((5/3)*2, () => {
-  fakeloadingtext.text = "Loading assets.."
-})
+function wait(ms) {
+  return new Promise(res => {
+    setTimeout(res, ms)
+  })
+}
 
-wait((5/3)*3, () => {
-  fakeloadingtext.text = "Loading assets..."
-})
-
-wait(6, () => {
-  fakeloadingtext.text = "Assets loaded successfully!\n\nClick anywhere to load game!"
-  fakeloadingtext.scale = vec2(4, 4)
+async function load() {
+  fakeloadingtext.text = `Loading assets..\n\nLoading asset 1/${assetnum}`
+  await wait(250)
+  await loadSprite("loadingscreen", "sprites/Loading_screen.png")
+  add([
+    sprite("loadingscreen"),
+    z(-99),
+    pos(center().x, 0),
+    origin('top')
+  ])
+  fakeloadingtext.moveTo(center().x, height() - 30)
+  fakeloadingtext.text = `Loading assets... Loading asset 2/${assetnum}`
+  await wait(250)
+  await loadSpriteAtlas("sprites/bfPixel.png", json)
+  fakeloadingtext.text = `Loading assets... Loading asset 3/${assetnum}`
+  await wait(250)
+  await loadSpriteAtlas("sprites/fnflogo.png", menuJSON)
+  fakeloadingtext.text = `Loading assets... Loading asset 4/${assetnum}`
+  await wait(250)
+  await loadSpriteAtlas("sprites/senpaaaai.png", opponentJSON)
+  fakeloadingtext.text = `Loading assets... Loading asset 5/${assetnum}`
+  await wait(250)
+  await loadSprite('story mode: idle', 'sprites/story-mode.png')
+  fakeloadingtext.text = `Loading assets... Loading asset 6/${assetnum}`
+  await wait(250)
+  await loadSprite('freeplay: idle', 'sprites/freeplay.png')
+  fakeloadingtext.text = `Loading assets... Loading asset 7/${assetnum}`
+  await wait(250)
+  await loadSprite('week6bg', 'sprites/bg/bg.png')
+  fakeloadingtext.text = `Loading assets... Loading asset 8/${assetnum}`
+  await wait(250)
+  await loadSprite('story mode: selected', 'sprites/story-mode_selec.png')
+  fakeloadingtext.text = `Loading assets... Loading asset 9/${assetnum}`
+  await wait(250)
+  await loadSprite('freeplay: selected', 'sprites/freeplay_selec.png')
+  fakeloadingtext.text = `Loading assets... Loading asset 10/${assetnum}`
+  await wait(250)
+  await loadPedit('arrowdown_pressed', 'sprites/downpressed.pedit')
+  fakeloadingtext.text = `Loading assets... Loading asset 11/${assetnum}`
+  await wait(250)
+  await loadPedit('arrowleft_pressed', 'sprites/leftpressed.pedit')
+  fakeloadingtext.text = `Loading assets... Loading asset 12/${assetnum}`
+  await wait(250)
+  await loadPedit('arrowright_pressed', 'sprites/rightpressed.pedit')
+  fakeloadingtext.text = `Loading assets... Loading asset 13/${assetnum}`
+  await wait(250)
+  await loadPedit('arrowup_pressed', 'sprites/uppressed.pedit')
+  fakeloadingtext.text = `Loading assets... Loading asset 14/${assetnum}`
+  await wait(250)
+  await loadPedit('allnotpressed', 'sprites/allnotpressed.pedit')
+  fakeloadingtext.text = `Loading assets... Loading asset 15/${assetnum}`
+  await wait(250)
+  await loadSprite('backspace', 'sprites/backspace.png')
+  fakeloadingtext.text = `Loading assets... Loading asset 16/${assetnum}`
+  await wait(250)
+  await loadSprite('art', 'sprites/Funkin.png')
+  fakeloadingtext.text = "Assets loaded successfully! Click anywhere to load game!"
+  fakeloadingtext.scale = vec2(2.7, 2.7)
   onClick(() => {
     go('main')
   })
-})
+}
+
+load()

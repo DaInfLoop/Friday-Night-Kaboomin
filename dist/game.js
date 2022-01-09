@@ -1,6 +1,26 @@
 (() => {
   var __defProp = Object.defineProperty;
   var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+  var __async = (__this, __arguments, generator) => {
+    return new Promise((resolve, reject) => {
+      var fulfilled = (value) => {
+        try {
+          step(generator.next(value));
+        } catch (e) {
+          reject(e);
+        }
+      };
+      var rejected = (value) => {
+        try {
+          step(generator.throw(value));
+        } catch (e) {
+          reject(e);
+        }
+      };
+      var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+      step((generator = generator.apply(__this, __arguments)).next());
+    });
+  };
 
   // node_modules/kaboom/dist/kaboom.mjs
   var Nt = Object.defineProperty;
@@ -2930,21 +2950,6 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     "fg",
     "ui"
   ], "players");
-  loadSpriteAtlas("sprites/bfPixel.png", spriteAtlasBF_default);
-  loadSpriteAtlas("sprites/fnflogo.png", spriteAtlasTitle_default);
-  loadSpriteAtlas("sprites/senpaaaai.png", spriteAtlasOpponent_default);
-  loadSprite("story mode: idle", "sprites/story-mode.png");
-  loadSprite("freeplay: idle", "sprites/freeplay.png");
-  loadSprite("week6bg", "sprites/bg/bg.png");
-  loadSprite("story mode: selected", "sprites/story-mode_selec.png");
-  loadSprite("freeplay: selected", "sprites/freeplay_selec.png");
-  loadPedit("arrowdown_pressed", "sprites/downpressed.pedit");
-  loadPedit("arrowleft_pressed", "sprites/leftpressed.pedit");
-  loadPedit("arrowright_pressed", "sprites/rightpressed.pedit");
-  loadPedit("arrowup_pressed", "sprites/uppressed.pedit");
-  loadPedit("allnotpressed", "sprites/allnotpressed.pedit");
-  loadSprite("backspace", "sprites/backspace.png");
-  loadSprite("art", "sprites/Funkin.png");
   var inmenu = true;
   scene("cool stuff", () => {
     inmenu = false;
@@ -2966,7 +2971,8 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       pos(256, 293),
       area(),
       scale(4),
-      origin("center")
+      origin("center"),
+      { currentAnimation: "opponent", animations: ["opponent", "mad_opponent"] }
     ]);
     opponent2.play("idle");
     const bg = add([
@@ -3237,6 +3243,9 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
         RightReleaseCanceller = keybinds.WASD.right.release();
         keybinds.current = "WASD";
         keybindstext.text = "Current Keybinds: Keyboard Keys (WASD)";
+        opponent2.stop();
+        opponent2.use(sprite("mad_opponent"));
+        opponent2.play("idle");
       } else if (keybinds.current == "WASD") {
         DownHoldCanceller();
         DownReleaseCanceller();
@@ -3256,6 +3265,9 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
         RightReleaseCanceller = keybinds.ARROWS.right.release();
         keybinds.current = "ARROWS";
         keybindstext.text = "Current Keybinds: Arrow Keys (Left, Right, Up, Down)";
+        opponent2.stop();
+        opponent2.use(sprite("opponent"));
+        opponent2.play("idle");
       }
       keybindstext.opacity = 1;
       wait(3, fadeKeybinds);
@@ -3321,29 +3333,89 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
   });
   add([
     rect(width(), height()),
-    color(0, 0, 0)
+    color(202, 255, 77),
+    z(-100)
   ]);
   var fakeloadingtext = add([
-    text("Loading assets", { font: "sinko" }),
-    scale(7),
+    text("Loading assets...", { font: "sinko" }),
+    scale(4),
     pos(center()),
     origin("center")
   ]);
-  wait(5 / 3, () => {
-    fakeloadingtext.text = "Loading assets.";
-  });
-  wait(5 / 3 * 2, () => {
-    fakeloadingtext.text = "Loading assets..";
-  });
-  wait(5 / 3 * 3, () => {
-    fakeloadingtext.text = "Loading assets...";
-  });
-  wait(6, () => {
-    fakeloadingtext.text = "Assets loaded successfully!\n\nClick anywhere to load game!";
-    fakeloadingtext.scale = vec2(4, 4);
-    onClick(() => {
-      go("main");
+  var assetnum = 16;
+  function wait(ms) {
+    return new Promise((res) => {
+      setTimeout(res, ms);
     });
-  });
+  }
+  __name(wait, "wait");
+  function load() {
+    return __async(this, null, function* () {
+      fakeloadingtext.text = `Loading assets..
+
+Loading asset 1/${assetnum}`;
+      yield wait(250);
+      yield loadSprite("loadingscreen", "sprites/Loading_screen.png");
+      add([
+        sprite("loadingscreen"),
+        z(-99),
+        pos(center().x, 0),
+        origin("top")
+      ]);
+      fakeloadingtext.moveTo(center().x, height() - 30);
+      fakeloadingtext.text = `Loading assets... Loading asset 2/${assetnum}`;
+      yield wait(250);
+      yield loadSpriteAtlas("sprites/bfPixel.png", spriteAtlasBF_default);
+      fakeloadingtext.text = `Loading assets... Loading asset 3/${assetnum}`;
+      yield wait(250);
+      yield loadSpriteAtlas("sprites/fnflogo.png", spriteAtlasTitle_default);
+      fakeloadingtext.text = `Loading assets... Loading asset 4/${assetnum}`;
+      yield wait(250);
+      yield loadSpriteAtlas("sprites/senpaaaai.png", spriteAtlasOpponent_default);
+      fakeloadingtext.text = `Loading assets... Loading asset 5/${assetnum}`;
+      yield wait(250);
+      yield loadSprite("story mode: idle", "sprites/story-mode.png");
+      fakeloadingtext.text = `Loading assets... Loading asset 6/${assetnum}`;
+      yield wait(250);
+      yield loadSprite("freeplay: idle", "sprites/freeplay.png");
+      fakeloadingtext.text = `Loading assets... Loading asset 7/${assetnum}`;
+      yield wait(250);
+      yield loadSprite("week6bg", "sprites/bg/bg.png");
+      fakeloadingtext.text = `Loading assets... Loading asset 8/${assetnum}`;
+      yield wait(250);
+      yield loadSprite("story mode: selected", "sprites/story-mode_selec.png");
+      fakeloadingtext.text = `Loading assets... Loading asset 9/${assetnum}`;
+      yield wait(250);
+      yield loadSprite("freeplay: selected", "sprites/freeplay_selec.png");
+      fakeloadingtext.text = `Loading assets... Loading asset 10/${assetnum}`;
+      yield wait(250);
+      yield loadPedit("arrowdown_pressed", "sprites/downpressed.pedit");
+      fakeloadingtext.text = `Loading assets... Loading asset 11/${assetnum}`;
+      yield wait(250);
+      yield loadPedit("arrowleft_pressed", "sprites/leftpressed.pedit");
+      fakeloadingtext.text = `Loading assets... Loading asset 12/${assetnum}`;
+      yield wait(250);
+      yield loadPedit("arrowright_pressed", "sprites/rightpressed.pedit");
+      fakeloadingtext.text = `Loading assets... Loading asset 13/${assetnum}`;
+      yield wait(250);
+      yield loadPedit("arrowup_pressed", "sprites/uppressed.pedit");
+      fakeloadingtext.text = `Loading assets... Loading asset 14/${assetnum}`;
+      yield wait(250);
+      yield loadPedit("allnotpressed", "sprites/allnotpressed.pedit");
+      fakeloadingtext.text = `Loading assets... Loading asset 15/${assetnum}`;
+      yield wait(250);
+      yield loadSprite("backspace", "sprites/backspace.png");
+      fakeloadingtext.text = `Loading assets... Loading asset 16/${assetnum}`;
+      yield wait(250);
+      yield loadSprite("art", "sprites/Funkin.png");
+      fakeloadingtext.text = "Assets loaded successfully! Click anywhere to load game!";
+      fakeloadingtext.scale = vec2(2.7, 2.7);
+      onClick(() => {
+        go("main");
+      });
+    });
+  }
+  __name(load, "load");
+  load();
 })();
 //# sourceMappingURL=game.js.map

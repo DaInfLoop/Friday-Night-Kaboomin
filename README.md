@@ -7,3 +7,5 @@ This game is made in [Kaboom](https://github.com/replit/kaboom), a JS game engin
 
 It has a HTML5 version (which you can play [here](https://friday-night-kaboomin.dainfloop.repl.co)), and a PC version soon!
 
+Credits in credits.txt, or via the web version: https://friday-night-kaboomin.dainfloop.repl.co/credits.md or https://friday-night-kaboomin.dainfloop.repl.co/CREDITS.md
+
