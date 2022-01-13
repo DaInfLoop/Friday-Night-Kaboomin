@@ -9,7 +9,7 @@ body:
     attributes:
       value: |
         Have a suggestion for the game, whether it be a new character, new song or new anything, here's the place to be!
-        (Anything wrapped in <!-- -->, you will only see.)
+        (Anything wrapped in < !-- -->, you will only see.)
   - type: dropdown
     id: type
     attributes: 
