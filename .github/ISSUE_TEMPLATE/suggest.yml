@@ -1,0 +1,39 @@
+name: Suggestion
+description: Give a suggestion for the game.
+title: "[Suggestion]: "
+labels: ["suggestion"]
+assignees:
+  - dainfloop
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have a suggestion for the game, whether it be a new character, new song or new anything, here's the place to be!
+  - type: dropdown
+    id: type
+    attributes: 
+      label: |
+        What type of suggestion is this?
+        <!-- Test! -->
+      multiple: false
+      options:
+        - Game
+        - Something
+    validations:
+      required: true
+  - type: dropdown
+    id: browsers
+    attributes:
+      label: What browsers are you seeing the problem on?
+      multiple: true
+      options:
+        - Firefox
+        - Chrome
+        - Safari
+        - Microsoft Edge
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Please copy and paste any relevant log output (CTRL+SHIFT+I). This will be automatically formatted into code, so no need for backticks.
+      render: shell
