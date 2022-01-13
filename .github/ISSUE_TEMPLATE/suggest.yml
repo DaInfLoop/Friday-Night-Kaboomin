@@ -9,31 +9,32 @@ body:
     attributes:
       value: |
         Have a suggestion for the game, whether it be a new character, new song or new anything, here's the place to be!
+        (Anything wrapped in <!-- -->, you will only see.)
   - type: dropdown
     id: type
     attributes: 
       label: |
         What type of suggestion is this?
-        <!-- Test! -->
+        <!-- Game means anything that isn't already on the dropdown. Note: custom weeks will not be added, but you can fork this if you want and edit it! -->
       multiple: false
       options:
         - Game
-        - Something
+        - Song
+        - New Character
     validations:
       required: true
-  - type: dropdown
-    id: browsers
-    attributes:
-      label: What browsers are you seeing the problem on?
-      multiple: true
-      options:
-        - Firefox
-        - Chrome
-        - Safari
-        - Microsoft Edge
   - type: textarea
-    id: logs
+    id: explain
     attributes:
-      label: Relevant log output
-      description: Please copy and paste any relevant log output (CTRL+SHIFT+I). This will be automatically formatted into code, so no need for backticks.
-      render: shell
+      label: Expand on what your suggestion is.
+      placeholder: |
+        Ex. When all the erect remixes come out, I think they should be added to the game
+    validations:
+      required: true
+  - type: checkboxes
+    id: checked
+    attributes:
+      label: Have you checked your suggestion hasn't been posted by anyone else?
+      options:
+        - label: I have checked no one has posted my suggestion, and that my suggestion is unique!
+          required: true
