@@ -193,3 +193,22 @@ function render() {
 	}
 
 }
+
+async function fetch(url, opts) {
+  return await require('node-fetch')(url, opts)
+}
+
+require('node-fetch')('https://api.github.com/projects/columns/17433577/cards', {
+  headers: {
+    Authorization: `token ${process.env.GITHUB_TOKEN}`
+  }
+}).then(res => res.json()).then(res => {
+  let todo = `To do list:\n\n`
+  res.forEach((item) => {
+    todo = `${todo}- ${item.note}\n`
+  })
+
+  todo = `${todo}\nEdit this list in Github Projects: https://github.com/DaInfLoop/Friday-Night-Kaboomin/projects/1`
+
+  fs.writeFileSync('./TODO.txt', todo)
+})

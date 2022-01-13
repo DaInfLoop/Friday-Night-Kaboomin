@@ -1,0 +1,6 @@
+To do list:
+
+- Week selection menu
+- Add charting
+
+Edit this list in Github Projects: https://github.com/DaInfLoop/Friday-Night-Kaboomin/projects/1
